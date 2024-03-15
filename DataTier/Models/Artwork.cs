@@ -20,6 +20,14 @@ namespace DataTier.Models
         public string? Status { get; set; }
         public string? CategoryName { get; set; }
         public string? Author { get; set; }
+        public string Description { get; set; }
+        public byte[]? Image { get; set; }
+        public DateTime CompletionDate { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
+
+
+
 
         public virtual User? OwnerNavigation { get; set; }
         public virtual ICollection<ImageList> ImageLists { get; set; }

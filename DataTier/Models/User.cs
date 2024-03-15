@@ -14,10 +14,10 @@ namespace DataTier.Models
             Transactions = new HashSet<Transaction>();
         }
 
-       public int IdUser { get; set; }
+        public int IdUser { get; set; }
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public string Role{ get; set; }
+        public string Role { get; set; }
         public string? Gender { get; set; }
         public string? Email { get; set; }
         public string? Avatar { get; set; }

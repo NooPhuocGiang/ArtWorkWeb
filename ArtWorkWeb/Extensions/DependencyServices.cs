@@ -31,13 +31,15 @@ namespace ArtWorkWeb.Extensions
             });
 
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             return services;
         }
         public static IServiceCollection AddJwtValidation(this IServiceCollection services)
         {
-            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

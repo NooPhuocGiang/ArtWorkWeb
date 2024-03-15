@@ -35,11 +35,26 @@ namespace ArtWorkWeb.Controllers
             }
             return Ok(reponse.Value);
         }
-        [HttpGet("hotartwork")]
-        public IActionResult GetHotProduct() 
+
+        [HttpGet("HotArtWork")]
+        public IActionResult GetHotProduct()
         {
             var reponse = _productService.GetHotProduct();
             return Ok(reponse.Value);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProduct(int id)
+        {
+            var (message, response) = _productService.GetProduct(id);
+
+            if (response == null)
+            {
+                return NotFound(message);
+            }
+
+            return Ok(response);
+        }
+
     }
 }

@@ -45,7 +45,7 @@ namespace DataTier.Repository.Implement
             return userProductViewModels;
         }
 
-        public List<HotProductViewModel> GetHotProduct()
+        public List<ProductResponseModel> GetHotProduct()
         {
             var maxLikes = _context.Likes
                 .GroupBy(l => l.ArtworkId)
@@ -54,15 +54,22 @@ namespace DataTier.Repository.Implement
                 .FirstOrDefault()?.Count;
 
             if (maxLikes == null)
-                return new List<HotProductViewModel>(); // Trả về danh sách rỗng nếu không có sản phẩm nào
+                return new List<ProductResponseModel>(); // Trả về danh sách rỗng nếu không có sản phẩm nào
 
             // Lấy ra tất cả sản phẩm có số lượt like bằng maxLikes
             var mostLikedArtworks = _context.Artworks
                 .Where(a => a.Likes.Count == maxLikes)
-                .Select(a => new HotProductViewModel
+                .Select(a => new ProductResponseModel
                 {
+                    IdArtwork = a.IdArtwork,
                     Name = a.Name,
-                    Price = a.Price
+                    Price = a.Price,
+                    Owner = a.Owner,
+                    Status = a.Status,
+                    CategoryName = a.CategoryName,
+                    Author = a.Author,
+                    OwnerNavigation = a.OwnerNavigation,
+                    ImageLists = a.ImageLists
                 })
                 .ToList();
 
@@ -78,5 +85,25 @@ namespace DataTier.Repository.Implement
 
             return imageUrls;
         }
+
+        public ProductResponseModel GetProduct(int id)
+        {
+            return _context.Artworks
+                .Where(a => a.IdArtwork == id)
+                .Select(a => new ProductResponseModel
+                {
+                    IdArtwork = a.IdArtwork,
+                    Name = a.Name,
+                    Price = a.Price,
+                    Owner = a.Owner,
+                    Status = a.Status,
+                    CategoryName = a.CategoryName,
+                    Author = a.Author,
+                    OwnerNavigation = a.OwnerNavigation,
+                    ImageLists = a.ImageLists
+                })
+                .FirstOrDefault();
+        }
+
     }
 }

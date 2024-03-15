@@ -10,13 +10,13 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Logging.ClearProviders();
-      
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy(name: CorsConstant.PolicyName,
                 policy => { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
         });
-        
+
         builder.Services.AddControllers().AddJsonOptions(x =>
         {
             x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -30,8 +30,7 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddConfigSwagger();
-        builder.Services.AddScoped<IUserService, UserService>();
-        
+
         var app = builder.Build();
         //app.UseCors(builder => 
         //{ builder.AllowAnyOrigin()
@@ -50,7 +49,7 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-                    
+
         app.Run();
     }
 }

@@ -6,7 +6,8 @@ namespace ArtWorkWeb.Service.Interfaces
     public interface IProductService
     {
         KeyValuePair<MessageViewModel, List<UserProductViewModel>> GetAllProductUser(int id);
-        KeyValuePair<MessageViewModel, List<HotProductViewModel>> GetHotProduct();
+        KeyValuePair<MessageViewModel, List<ProductResponseModel>> GetHotProduct();
+        KeyValuePair<MessageViewModel, ProductResponseModel> GetProduct(int id);
         KeyValuePair<MessageViewModel, List<ImageViewModel>> GetImage(int id);
     }
 }

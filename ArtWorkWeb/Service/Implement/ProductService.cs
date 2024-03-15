@@ -65,12 +65,12 @@ namespace ArtWorkWeb.Service.Implement
                 );
         }
 
-        KeyValuePair<MessageViewModel, List<HotProductViewModel>> IProductService.GetHotProduct()
+        KeyValuePair<MessageViewModel, List<ProductResponseModel>> IProductService.GetHotProduct()
         {
             var response = _productRepository.GetHotProduct();
             if (response == null)
             {
-                return new KeyValuePair<MessageViewModel, List<HotProductViewModel>>(
+                return new KeyValuePair<MessageViewModel, List<ProductResponseModel>>(
                         new MessageViewModel
                         {
                             StatusCode = System.Net.HttpStatusCode.NotFound,
@@ -79,7 +79,7 @@ namespace ArtWorkWeb.Service.Implement
                         null
                         );
             }
-            return new KeyValuePair<MessageViewModel, List<HotProductViewModel>>(
+            return new KeyValuePair<MessageViewModel, List<ProductResponseModel>>(
                 new MessageViewModel
                 {
                     StatusCode = System.Net.HttpStatusCode.OK,
@@ -88,5 +88,30 @@ namespace ArtWorkWeb.Service.Implement
                 response
                 );
         }
+
+        KeyValuePair<MessageViewModel, ProductResponseModel> IProductService.GetProduct(int id)
+        {
+            var response = _productRepository.GetProduct(id);
+            if (response == null)
+            {
+                return new KeyValuePair<MessageViewModel, ProductResponseModel>(
+                        new MessageViewModel
+                        {
+                            StatusCode = System.Net.HttpStatusCode.NotFound,
+                            Message = "No product found"
+                        },
+                        null
+                        );
+            }
+            return new KeyValuePair<MessageViewModel, ProductResponseModel>(
+                new MessageViewModel
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Message = string.Empty
+                },
+                response
+                );
+        }
+
     }
 }
