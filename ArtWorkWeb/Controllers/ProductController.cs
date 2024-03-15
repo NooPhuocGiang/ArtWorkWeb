@@ -41,5 +41,10 @@ namespace ArtWorkWeb.Controllers
             var reponse = _productService.GetHotProduct();
             return Ok(reponse.Value);
         }
+        [HttpDelete("deleteartwork")]
+        public IActionResult DeleteProduct(int id)
+        {
+            return Ok();
+        }
     }
 }
