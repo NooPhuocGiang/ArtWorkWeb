@@ -46,5 +46,10 @@ namespace ArtWorkWeb.Controllers
         {
             return Ok();
         }
+        [HttpPost("createartwork")]
+        public IActionResult CreateArtwork() 
+        {
+            return Ok();
+        }
     }
 }
